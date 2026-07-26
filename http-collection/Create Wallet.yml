@@ -1,0 +1,23 @@
+info:
+  name: Create Wallet
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:8080/wallets
+  body:
+    type: json
+    data: |-
+      {
+        "documentNumber": "5555555",
+        "email": "thiago@gmail.com",
+        "name": "Thiago"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
