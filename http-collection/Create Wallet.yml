@@ -10,8 +10,8 @@ http:
     type: json
     data: |-
       {
-        "documentNumber": "5555555",
-        "email": "thiago@gmail.com",
+        "documentNumber": "12345678",
+        "email": "thiago@email.com",
         "name": "Thiago"
       }
   auth: inherit

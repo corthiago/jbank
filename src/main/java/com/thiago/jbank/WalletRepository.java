@@ -8,6 +8,6 @@ import java.util.UUID;
 
 public interface WalletRepository extends JpaRepository<Wallet, UUID> {
 
-    Optional<Wallet> findByDocumentNumberOrEmail(String cpf, String email);
+    Optional<Wallet> findByDocumentNumberOrEmail(String documentNumber, String email);
 
 }

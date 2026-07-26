@@ -1,5 +1,6 @@
 package com.thiago.jbank.exception;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 
 public class WalletDataAlreadyExistsException extends JBankException{
@@ -13,7 +14,7 @@ public class WalletDataAlreadyExistsException extends JBankException{
 
     @Override
     public ProblemDetail toProblemDetail() {
-        var pd  = ProblemDetail.forStatus(422);
+        var pd  = ProblemDetail.forStatus(HttpStatus.UNPROCESSABLE_CONTENT);
 
         pd.setTitle("Wallet data already existis");
         pd.setDetail(detail);
