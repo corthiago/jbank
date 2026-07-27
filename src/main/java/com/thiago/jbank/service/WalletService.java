@@ -1,22 +1,31 @@
 package com.thiago.jbank.service;
 
-import com.thiago.jbank.WalletRepository;
+import com.thiago.jbank.entities.Deposit;
+import com.thiago.jbank.exception.WalletNotFoundException;
+import com.thiago.jbank.repository.DepositRepository;
+import com.thiago.jbank.repository.WalletRepository;
 import com.thiago.jbank.controller.dto.CreateWalletDto;
+import com.thiago.jbank.controller.dto.DepositMoneyDto;
 import com.thiago.jbank.entities.Wallet;
 import com.thiago.jbank.exception.DeleteWalletException;
 import com.thiago.jbank.exception.WalletDataAlreadyExistsException;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
 public class WalletService {
 
     private final WalletRepository walletRepository;
+    private final DepositRepository depositRepository;
 
-    public WalletService(WalletRepository walletRepository) {
+    public WalletService(WalletRepository walletRepository, DepositRepository depositRepository) {
         this.walletRepository = walletRepository;
+        this.depositRepository = depositRepository;
     }
 
 
@@ -46,5 +55,24 @@ public class WalletService {
         }
 
         return wallet.isPresent();
+    }
+
+    @Transactional
+    public void depositMoney(UUID walletId, DepositMoneyDto dto, String ipAddress) {
+
+        var wallet = walletRepository.findById(walletId)
+                .orElseThrow(() -> new WalletNotFoundException("There is not wallet with this id"));
+
+        var deposit = new Deposit();
+        deposit.setWallet(wallet);
+        deposit.setAmount(dto.value());
+        deposit.setDateTime(LocalDateTime.now());
+        deposit.setIpAddress(ipAddress);
+
+        depositRepository.save(deposit);
+
+        wallet.setBalance(wallet.getBalance().add(dto.value()));
+
+        walletRepository.save(wallet);
     }
 }

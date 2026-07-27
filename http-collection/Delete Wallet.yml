@@ -5,7 +5,7 @@ info:
 
 http:
   method: DELETE
-  url: http://localhost:8080/wallets/a22d2ce9d0be406097568b45dc390bda
+  url: http://localhost:8080/wallets/175ecfc3-b782-438b-9af3-79dfbaf8a6e2
   auth: inherit
 
 settings:

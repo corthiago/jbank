@@ -1,7 +1,9 @@
 package com.thiago.jbank.controller;
 
 import com.thiago.jbank.controller.dto.CreateWalletDto;
+import com.thiago.jbank.controller.dto.DepositMoneyDto;
 import com.thiago.jbank.service.WalletService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +39,18 @@ public class WalletController {
                 ResponseEntity.noContent().build() :
                 ResponseEntity.notFound().build();
 
+    }
+
+    @PostMapping(path = "/{walletId}/deposits")
+    public ResponseEntity<Void> deposityMoney(@PathVariable(name = "walletId") UUID walletId,
+                                              @RequestBody @Valid DepositMoneyDto dto,
+                                              HttpServletRequest request){
+
+        var ipAddress = request.getAttribute("x-user-ip").toString();
+
+        walletService.depositMoney(walletId, dto, ipAddress);
+
+        return ResponseEntity.ok().build();
     }
 
 }

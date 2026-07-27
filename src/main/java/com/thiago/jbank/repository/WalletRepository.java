@@ -1,4 +1,4 @@
-package com.thiago.jbank;
+package com.thiago.jbank.repository;
 
 import com.thiago.jbank.entities.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
