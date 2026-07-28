@@ -1,0 +1,23 @@
+info:
+  name: Transfer Money
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://localhost:8080/transfers
+  body:
+    type: json
+    data: |-
+      {
+        "sender": "41f20143-d8d5-4b78-8f9d-c8cd6bd0e267",
+        "receiver": "c119e148-33bf-45cd-ad29-01897103da6a",
+        "value": 5
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

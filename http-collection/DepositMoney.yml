@@ -5,12 +5,12 @@ info:
 
 http:
   method: POST
-  url: http://localhost:8080/wallets/ef9c6559-d9e4-4cf1-b01a-819424b5a7fc/deposits
+  url: http://localhost:8080/wallets/41f20143-d8d5-4b78-8f9d-c8cd6bd0e267/deposits
   body:
     type: json
     data: |-
       {
-        "value": 50
+        "value": 100
       }
   auth: inherit
 
