@@ -2,6 +2,7 @@ package com.thiago.jbank.controller;
 
 import com.thiago.jbank.controller.dto.CreateWalletDto;
 import com.thiago.jbank.controller.dto.DepositMoneyDto;
+import com.thiago.jbank.controller.dto.StatementDto;
 import com.thiago.jbank.service.WalletService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -51,6 +52,16 @@ public class WalletController {
         walletService.depositMoney(walletId, dto, ipAddress);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(path = "/{walletId}/statements")
+    public ResponseEntity<StatementDto> getStatements(@PathVariable(value = "walletId") UUID walletId,
+                                                      @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+                                                      @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize){
+
+        var statement = walletService.getStatements(walletId, page, pageSize);
+
+        return ResponseEntity.ok(statement);
     }
 
 }
