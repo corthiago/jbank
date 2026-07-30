@@ -5,16 +5,14 @@ info:
 
 http:
   method: GET
-  url: http://localhost:8080/wallets/41f20143-d8d5-4b78-8f9d-c8cd6bd0e267/statements
+  url: http://localhost:8080/wallets/41f20143-d8d5-4b78-8f9d-c8cd6bd0e267/statements?page=0&pageSize=5
   params:
     - name: page
       value: "0"
       type: query
-      disabled: true
     - name: pageSize
-      value: "1"
+      value: "5"
       type: query
-      disabled: true
   auth: inherit
 
 settings:
